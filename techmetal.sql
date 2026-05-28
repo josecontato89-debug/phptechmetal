@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/05/2026 às 03:23
+-- Tempo de geração: 28/05/2026 às 03:06
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -73,12 +73,20 @@ CREATE TABLE `equipamentos` (
 
 CREATE TABLE `manutencoes` (
   `id` int(11) NOT NULL,
-  `maquina` varchar(150) NOT NULL,
-  `tecnico` varchar(50) NOT NULL,
   `problema` varchar(220) NOT NULL,
+  `prioridade` varchar(20) NOT NULL,
   `data_inicio` date NOT NULL,
   `data_fim` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `manutencoes`
+--
+
+INSERT INTO `manutencoes` (`id`, `problema`, `prioridade`, `data_inicio`, `data_fim`) VALUES
+(1, 'Vazamento de Oleo', 'ALTA', '2026-05-26', '2026-05-27'),
+(2, 'Troca de correia', 'MEDIA', '2026-05-27', '2026-05-27'),
+(3, 'Troca de reparos', 'BAIXA', '2026-05-25', '2026-05-27');
 
 -- --------------------------------------------------------
 
@@ -101,7 +109,21 @@ CREATE TABLE `operadores` (
 --
 
 INSERT INTO `operadores` (`id`, `nome`, `cpf`, `funcao`, `genero`, `login`, `senha`) VALUES
-(1, 'Jose', 25252525, 'admin', 'masculino', 'admin', 'admin');
+(1, 'Jose', 25252525, 'admin', 'masculino', 'admin', 'admin'),
+(3, 'Dionisio cavalcante', 2147483647, 'Mecanico', 'masculino', 'mecanico', '1234');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `ordem_manutencoes`
+--
+
+CREATE TABLE `ordem_manutencoes` (
+  `id` int(11) NOT NULL,
+  `id_ordem` int(11) NOT NULL,
+  `manutencao` int(11) NOT NULL,
+  `equipamentos` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -112,7 +134,7 @@ INSERT INTO `operadores` (`id`, `nome`, `cpf`, `funcao`, `genero`, `login`, `sen
 CREATE TABLE `setores` (
   `id` int(11) NOT NULL,
   `tipo` varchar(150) NOT NULL,
-  `quantidade_funcionarios` int(11) NOT NULL,
+  `quant_funcionarios` int(11) NOT NULL,
   `funcao` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -182,13 +204,13 @@ ALTER TABLE `equipamentos`
 -- AUTO_INCREMENT de tabela `manutencoes`
 --
 ALTER TABLE `manutencoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `operadores`
 --
 ALTER TABLE `operadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `setores`
