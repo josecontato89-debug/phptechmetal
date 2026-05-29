@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28/05/2026 às 03:06
+-- Tempo de geração: 30/05/2026 às 00:39
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -101,16 +101,17 @@ CREATE TABLE `operadores` (
   `funcao` varchar(100) NOT NULL,
   `genero` varchar(10) NOT NULL,
   `login` varchar(100) NOT NULL,
-  `senha` varchar(100) NOT NULL
+  `senha` varchar(100) NOT NULL,
+  `senha_secundaria` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `operadores`
 --
 
-INSERT INTO `operadores` (`id`, `nome`, `cpf`, `funcao`, `genero`, `login`, `senha`) VALUES
-(1, 'Jose', 25252525, 'admin', 'masculino', 'admin', 'admin'),
-(3, 'Dionisio cavalcante', 2147483647, 'Mecanico', 'masculino', 'mecanico', '1234');
+INSERT INTO `operadores` (`id`, `nome`, `cpf`, `funcao`, `genero`, `login`, `senha`, `senha_secundaria`) VALUES
+(1, 'Jose', 25252525, 'admin', 'masculino', 'admin', 'admin', ''),
+(3, 'Dionisio cavalcante', 2147483647, 'Mecanico', 'masculino', 'mecanico', '1234', '');
 
 -- --------------------------------------------------------
 
@@ -133,7 +134,7 @@ CREATE TABLE `ordem_manutencoes` (
 
 CREATE TABLE `setores` (
   `id` int(11) NOT NULL,
-  `tipo` varchar(150) NOT NULL,
+  `setor` varchar(150) NOT NULL,
   `quant_funcionarios` int(11) NOT NULL,
   `funcao` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

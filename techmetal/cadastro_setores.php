@@ -1,15 +1,13 @@
 <?php
 include 'conecta.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nome = $_POST['nome'];
-    $cpf = $_POST['cpf'];
+    $setor = $_POST['setor'];
+    $quant_funcionarios = $_POST['quant_funcionarios'];
     $funcao = $_POST['funcao'];
-    $genero = $_POST['genero'];
-    $login = $_POST['login'];
-    $senha = $_POST['senha'];
+    
     
     try {
-        $sqlCheck = "SELECT COUNT(*) FROM operadores WHERE cpf = :cpf";
+        $sqlCheck = "SELECT COUNT(*) FROM setores WHERE cpf = :cpf";
         $stmtCheck = $pdo->prepare($sqlCheck);
         $stmtCheck->bindParam(':cpf', $cpf);
         $stmtCheck->execute();

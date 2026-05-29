@@ -30,6 +30,8 @@
        echo "<a href='alocacoes.php' style = 'color: black; text-decoration: none; font-weight: bold'>ALOCAÇÕES</a>";
     }
     else{
+        echo "<a href='home.php' style = 'color: black; text-decoration: none; font-weight: bold'>HOME</a>";
+       echo "<b> | </b>";
         echo "<a href='manutencoes.php' style = 'color: black; text-decoration: none; font-weight: bold'>MANUTENÇÕES</a>";
         echo "<b> | </b>";
         echo "<a href='setores.php' style = 'color: black; text-decoration: none; font-weight: bold'>SETORES</a>";
