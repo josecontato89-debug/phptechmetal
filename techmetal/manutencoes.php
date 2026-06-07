@@ -85,6 +85,7 @@ if($funcao != "admin"){
 
                     <?php
                     include 'conecta.php';
+                   
 
                     $sql = "SELECT * FROM manutencoes ORDER BY prioridade";
                     $consulta = $pdo->query($sql);

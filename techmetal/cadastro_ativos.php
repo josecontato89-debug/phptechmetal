@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $setor = $_POST['setor'];
     
     try {
-        $sqlCheck = "SELECT COUNT(*) FROM ativos WHERE maquina=:maquina AND modelo=:modelo AND funcionalidade=:funcionalidade AND n_patrimonio=:n_patrimonio AND setor,:setor";
+        $sqlCheck = "SELECT COUNT(*) FROM ativos WHERE maquina=:maquina AND modelo=:modelo AND funcionalidade=:funcionalidade AND n_patrimonio=:n_patrimonio AND setor=:setor";
         $stmtCheck = $pdo->prepare($sqlCheck);
         $stmtCheck->bindParam(':maquina', $maquina);
         $stmtCheck->bindParam(':modelo', $modelo);

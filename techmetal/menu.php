@@ -14,7 +14,9 @@
        echo "<a href='operadores.php' style = 'color: black; text-decoration: none; font-weight: bold'>OPERADORES</a>";
        echo "<b> | </b>";       
        echo "<a href='alocacoes.php' style = 'color: black; text-decoration: none; font-weight: bold'>ALOCAÇÕES</a>";
-      
+       echo "<b> | </b>";
+       echo "<a href='ordem_manutencoes.php' style = 'color: black; text-decoration: none; font-weight: bold'>ORDENS DE MANUTENÇÃO</a>";
+
     }
     else if ($funcao == "administrativo"){
        echo "<a href='home.php' style = 'color: black; text-decoration: none; font-weight: bold'>HOME</a>";
@@ -28,6 +30,8 @@
        echo "<a href='manutencoes.php' style = 'color: black; text-decoration: none; font-weight: bold'>MANUTENÇÕES</a>";
        echo "<b> | </b>";       
        echo "<a href='alocacoes.php' style = 'color: black; text-decoration: none; font-weight: bold'>ALOCAÇÕES</a>";
+       echo "<b> | </b>";
+       echo "<a href='ordem_manutencoes.php' style = 'color: black; text-decoration: none; font-weight: bold'>ORDENS DE MANUTENÇÃO</a>";
     }
     else{
         echo "<a href='home.php' style = 'color: black; text-decoration: none; font-weight: bold'>HOME</a>";
@@ -35,5 +39,7 @@
         echo "<a href='manutencoes.php' style = 'color: black; text-decoration: none; font-weight: bold'>MANUTENÇÕES</a>";
         echo "<b> | </b>";
         echo "<a href='setores.php' style = 'color: black; text-decoration: none; font-weight: bold'>SETORES</a>";
+        echo "<b> | </b>";
+        echo "<a href='ordem_manutencoes.php' style = 'color: black; text-decoration: none; font-weight: bold'>ORDENS DE MANUTENÇÃO</a>";
     }
 ?>

@@ -13,9 +13,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="imagens/logo_aba.png" type="image/png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        
         <title>Mecanica</title>
         <style>
-            
             .header {
                 float: right;
             }
@@ -28,7 +30,7 @@
     </head>
     <body>
         <div class="container-fluid">
-            <img src="imagens/banner.png" alt="" whidth = "900"  height = "300" srcset="">
+            <img src="imagens/banner.png" alt="" width="900" height="300">
             <?php
                 echo "<div class='header'>";
                 if (isset($_SESSION['nome'])) {
@@ -49,76 +51,71 @@
             ?>
         </nav>
         <br/>
-        <div class ="container" >
+        <div class="container">
             <div class="row">
-                <div class="col-md-12 mb-4">
-                    <div class="card shadow border-2">
-                        <div class=" card-header bg-gray border-bottom py-3">
-                            <spam class="texto-destaque">Manutenções<spam/>
-                        </div>
-                        <div class="card-body" style=" text-align: center;">
-    <?php 
-    // Array para traduzir o mês para português
-    $meses = [
-        1 => 'Janeiro', 2 => 'Fevereiro', 3 => 'Março', 4 => 'Abril',
-        5 => 'Maio', 6 => 'Junho', 7 => 'Julho', 8 => 'Agosto',
-        9 => 'Setembro', 10 => 'Outubro', 11 => 'Novembro', 12 => 'Dezembro'
-    ];
-    $mes_atual = $meses[(int)date('m')];
-    $ano_atual = date('Y');
-
-    // Exibe o mês e o ano corrente na tela
-    echo "<p class='text-muted'>Total de manutenções em: <strong>" . $mes_atual . " / " . $ano_atual . "</strong></p>";
-    
-    include 'conecta.php';
-    
-    $sql = "SELECT s.maquinas, COUNT(s.id) AS total_no_mes 
-            FROM manutencoes os 
-            INNER JOIN ativos o ON os.id = o.id 
-            INNER JOIN setores s ON os.id = s.id 
-            WHERE YEAR(o.data_fim) = YEAR(CURRENT_DATE()) 
-              AND MONTH(o.data_fim) = MONTH(CURRENT_DATE()) 
-            GROUP BY s.problema 
-            ORDER BY total_no_mes DESC";
-            
-    $consulta = $pdo->query($sql);
-    $listaordens = $consulta->fetchAll(PDO::FETCH_ASSOC);
-    
-    if (count($listaordens) > 0) {
-        echo "<table class='table table-hover align-middle'>";
-        echo "<thead class='table-light'>
-                <tr>
-                    <th>MANUTENÇÃO</th>
-                    <th>TOTAL NO MÊS</th>
-                </tr>
-              </thead>";
-        
-        echo "<tbody>";
-        
-        foreach ($listaordens as $item) {
-            echo "<tr>";
-            echo "<td>" . htmlspecialchars($item['problema']) . "</td>";
-            echo "<td><span class='badge bg-primary fs-6'>" . htmlspecialchars($item['total_no_mes']) . "</span></td>";
-            echo "</tr>";
-        }
-        
-        echo "</tbody>";
-        echo "</table>";
-    } else {
-        echo "<p class='text-danger'><b>NÃO EXISTEM MANUTENÇÕES CADASTRADAS EM " . strtoupper($mes_atual) . "!</b></p>";
-    }
-    ?>
-</div>
-                    </div>
-                </div>
                 <div class="col-md-6 mb-4">
                     <div class="card shadow border-2">
-                        <div class=" card-header bg-gray border-bottom py-3">
-                            <spam class="texto-destaque">ORDEM<spam/>
+                        <div class="card-header bg-gray border-bottom py-3">
+                            <span class="texto-destaque">Manutenções Ativas</span>
                         </div>
-                        <div class ="card-body">
-                        <?php
-                            include 'graf_prioridades.php';
+                        <div class="card-body" style="text-align: center;">
+                            <?php 
+                            $meses = [
+                                1 => 'Janeiro', 2 => 'Fevereiro', 3 => 'Março', 4 => 'Abril',
+                                5 => 'Maio', 6 => 'Junho', 7 => 'Julho', 8 => 'Agosto',
+                                9 => 'Setembro', 10 => 'Outubro', 11 => 'Novembro', 12 => 'Dezembro'
+                            ];
+                            $mes_atual = $meses[(int)date('m')];
+                            $ano_atual = date('Y');
+
+                            echo "<p class='text-muted'>Máquinas atualmente em manutenção e reparos:</p>";
+                            
+                            include 'conecta.php';
+                            
+                            // Query ajustada para buscar as ordens ativas contando quantas manutenções cada máquina possui no momento
+                            $sql = "SELECT a.maquina, COUNT(om.id) AS total_no_mes 
+                                    FROM ordem_manutencoes om 
+                                    INNER JOIN ativos a ON om.id_ordem = a.id 
+                                    GROUP BY a.maquina 
+                                    ORDER BY total_no_mes DESC";
+                                    
+                            $consulta = $pdo->query($sql);
+                            $listaordens = $consulta->fetchAll(PDO::FETCH_ASSOC);
+                            
+                            if (count($listaordens) > 0) {
+                                echo "<table class='table table-hover align-middle'>";
+                                echo "<thead class='table-light'>
+                                        <tr>
+                                            <th>MÁQUINA EM MANUTENÇÃO</th>
+                                            <th>ORDENS ABERTAS</th>
+                                        </tr>
+                                      </thead><tbody>";
+                                
+                                foreach ($listaordens as $item) {
+                                    echo "<tr>";
+                                    echo "<td style='text-align: left; padding-left: 20px;'>" . htmlspecialchars($item['maquina']) . "</td>";
+                                    echo "<td><span class='badge bg-warning text-dark fs-6'>" . htmlspecialchars($item['total_no_mes']) . "</span></td>";
+                                    echo "</tr>";
+                                }
+                                
+                                echo "</tbody></table>";
+                            } else {
+                                echo "<p class='text-danger'><b>NÃO EXISTEM MÁQUINAS EM MANUTENÇÃO NO MOMENTO!</b></p>";
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow border-2">
+                        <div class="card-header bg-gray border-bottom py-3">
+                            <span class="texto-destaque">GRÁFICO INDICADOR</span>
+                        </div>
+                        <div class="card-body">
+                            <?php
+                                // Inclui o arquivo do gráfico que processa os dados de ordem_manutencoes
+                                include 'graf_manutencoes.php';
                             ?>
                         </div>
                     </div>

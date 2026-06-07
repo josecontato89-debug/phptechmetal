@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03/06/2026 às 03:23
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.2.4
+-- Tempo de geração: 07/06/2026 às 21:04
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,6 +51,14 @@ CREATE TABLE `ativos` (
   `setor` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `ativos`
+--
+
+INSERT INTO `ativos` (`id`, `maquina`, `modelo`, `funcionalidade`, `n_patrimonio`, `setor`) VALUES
+(1, 'CNC TECHCASTER', 'teste', 'USINAGEM ', 5454, '2B'),
+(2, 'gghd', 'dfhgdf', 'USINAGEM ', 454, 'dfg');
+
 -- --------------------------------------------------------
 
 --
@@ -64,6 +72,13 @@ CREATE TABLE `equipamentos` (
   `objetivo` varchar(50) NOT NULL,
   `quantidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `equipamentos`
+--
+
+INSERT INTO `equipamentos` (`id`, `nome`, `tipo`, `objetivo`, `quantidade`) VALUES
+(1, 'teste1', 'teste1', 'teste1', 12);
 
 -- --------------------------------------------------------
 
@@ -126,6 +141,14 @@ CREATE TABLE `ordem_manutencoes` (
   `manutencao` int(11) NOT NULL,
   `equipamentos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `ordem_manutencoes`
+--
+
+INSERT INTO `ordem_manutencoes` (`id`, `id_ordem`, `manutencao`, `equipamentos`) VALUES
+(0, 1, 3, 1),
+(0, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -194,13 +217,13 @@ ALTER TABLE `alocacoes`
 -- AUTO_INCREMENT de tabela `ativos`
 --
 ALTER TABLE `ativos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `equipamentos`
 --
 ALTER TABLE `equipamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `manutencoes`
