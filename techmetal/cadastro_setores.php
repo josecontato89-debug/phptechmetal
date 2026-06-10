@@ -7,31 +7,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     
     try {
-        $sqlCheck = "SELECT COUNT(*) FROM setores WHERE cpf = :cpf";
+        $sqlCheck = "SELECT COUNT(*) FROM setores WHERE setor = :setor";
         $stmtCheck = $pdo->prepare($sqlCheck);
-        $stmtCheck->bindParam(':cpf', $cpf);
+        $stmtCheck->bindParam(':setor', $setor);
         $stmtCheck->execute();
         if ($stmtCheck->fetchColumn() > 0) {
             echo "<script>
-                    alert('Operador já existe em nosso banco de dados!');
+                    alert('Setor já existe em nosso banco de dados!');
                     history.back();
                   </script>";
         }
         else {
-            $sqlInsert = "INSERT INTO operadores (nome, cpf, funcao, genero, login, senha)
-                          VALUES (:nome, :cpf, :funcao, :genero, :login, :senha)";
+            $sqlInsert = "INSERT INTO setores (setor, quant_funcionarios, funcao)
+                          VALUES (:setor, :quant_funcionarios, :funcao)";
         
             $stmtInsert = $pdo->prepare($sqlInsert);
-            $stmtInsert->bindParam(':nome', $nome);
-            $stmtInsert->bindParam(':cpf', $cpf);
+            $stmtInsert->bindParam(':setor', $setor);
+            $stmtInsert->bindParam(':quant_funcionarios', $quant_funcionarios);
             $stmtInsert->bindParam(':funcao', $funcao);
-            $stmtInsert->bindParam(':genero', $genero);
-            $stmtInsert->bindParam(':login', $login);
-            $stmtInsert->bindParam(':senha', $senha);
+            
             if ($stmtInsert->execute()) {
                 echo "<script>
-                        alert('Operador cadastrada com sucesso!');
-                        window.location.href ='operadores.php';
+                        alert('Setor cadastrada com sucesso!');
+                        window.location.href ='setores.php';
                       </script>";
                 exit();
             } else {

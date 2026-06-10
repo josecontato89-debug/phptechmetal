@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/06/2026 às 21:04
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Tempo de geração: 10/06/2026 às 03:29
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,7 +57,8 @@ CREATE TABLE `ativos` (
 
 INSERT INTO `ativos` (`id`, `maquina`, `modelo`, `funcionalidade`, `n_patrimonio`, `setor`) VALUES
 (1, 'CNC TECHCASTER', 'teste', 'USINAGEM ', 5454, '2B'),
-(2, 'gghd', 'dfhgdf', 'USINAGEM ', 454, 'dfg');
+(3, 'mesa plana', '887', 'USINAGEM ', 874, '2b'),
+(4, 'empilhadeira', 'caterpila', 'Movimentação', 2545, '2B');
 
 -- --------------------------------------------------------
 
@@ -78,7 +79,9 @@ CREATE TABLE `equipamentos` (
 --
 
 INSERT INTO `equipamentos` (`id`, `nome`, `tipo`, `objetivo`, `quantidade`) VALUES
-(1, 'teste1', 'teste1', 'teste1', 12);
+(2, 'Capacete de proteção', 'EPI', 'Segurança', 30),
+(3, 'Cinto Paraquedista', 'EPI', 'Segurança em altitude', 5),
+(4, 'Chave de fenda', 'Ferramenta', 'Facilitar força de rotação', 50);
 
 -- --------------------------------------------------------
 
@@ -102,7 +105,8 @@ CREATE TABLE `manutencoes` (
 INSERT INTO `manutencoes` (`id`, `problema`, `prioridade`, `equipamentos`, `data_inicio`, `data_fim`) VALUES
 (1, 'Vazamento de Oleo', 'ALTA', '', '2026-05-26', '2026-05-27'),
 (2, 'Troca de correia', 'MEDIA', '', '2026-05-27', '2026-05-27'),
-(3, 'Troca de reparos', 'BAIXA', '', '2026-05-25', '2026-05-27');
+(3, 'Troca de reparos', 'BAIXA', '', '2026-05-25', '2026-05-27'),
+(5, 'Pane Eletrica', 'ALTA', '', '2026-06-09', '2026-06-16');
 
 -- --------------------------------------------------------
 
@@ -147,8 +151,10 @@ CREATE TABLE `ordem_manutencoes` (
 --
 
 INSERT INTO `ordem_manutencoes` (`id`, `id_ordem`, `manutencao`, `equipamentos`) VALUES
-(0, 1, 3, 1),
-(0, 2, 1, 1);
+(1, 4, 1, 4),
+(2, 1, 5, 2),
+(3, 3, 3, 2),
+(4, 3, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -162,6 +168,13 @@ CREATE TABLE `setores` (
   `quant_funcionarios` int(11) NOT NULL,
   `funcao` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `setores`
+--
+
+INSERT INTO `setores` (`id`, `setor`, `quant_funcionarios`, `funcao`) VALUES
+(2, '2B', 5, 'Mecanico');
 
 --
 -- Índices para tabelas despejadas
@@ -198,6 +211,12 @@ ALTER TABLE `operadores`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `ordem_manutencoes`
+--
+ALTER TABLE `ordem_manutencoes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `setores`
 --
 ALTER TABLE `setores`
@@ -217,19 +236,19 @@ ALTER TABLE `alocacoes`
 -- AUTO_INCREMENT de tabela `ativos`
 --
 ALTER TABLE `ativos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `equipamentos`
 --
 ALTER TABLE `equipamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `manutencoes`
 --
 ALTER TABLE `manutencoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `operadores`
@@ -238,10 +257,16 @@ ALTER TABLE `operadores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de tabela `ordem_manutencoes`
+--
+ALTER TABLE `ordem_manutencoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de tabela `setores`
 --
 ALTER TABLE `setores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -63,9 +63,9 @@ include 'conecta.php';
         <div class="col-md-10 mb-4">
             <div class="card shadow border-2">
                 <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
-                      <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 10l2.677 4.287a.5.5 0 0 1-.423.713H.746a.5.5 0 0 1-.423-.713L3 10 1.203 8.026A4.5 4.5 0 1 1 16 4.5zm-3.882 3.99L10.5 7.293 8.882 8.49a.5.5 0 0 1-.764-.53l.635-2.541L6.717 3.712a.5.5 0 0 1 .282-.853l2.583-.224L10.5.25a.5.5 0 0 1 .936 0l1.118 2.385 2.583.224a.5.5 0 0 1 .282.853L13.5 5.42l.635 2.54a.5.5 0 0 1-.764.531z"/>
-                    </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16">
+  <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>
+</svg>
                     <b>ORDENS DE MANUTENÇÃO ATIVAS</b>
                 </div>
 
